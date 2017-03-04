@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import ReactDOM from 'react-dom'
 import { createContainer } from 'meteor/react-meteor-data'
 
 import { Tasks } from '../api/tasks.js'
@@ -6,29 +7,40 @@ import { Tasks } from '../api/tasks.js'
 import Task from './Task.jsx'
 
 class App extends Component {
-  // getTasks() {
-  //   return [
-  //     { _id: 1, text: 'This is task 1' },
-  //     { _id: 2, text: 'This is task 2' },
-  //     { _id: 3, text: 'This is task 3' }
-  //   ]
-  // }
+  handleSubmit(e) {
+    e.preventDefault()
+
+    const textField = ReactDOM.findDOMNode(this.refs.textInput).value.trim()
+
+    Tasks.insert({
+      text: textField,
+      createdAt: new Date()
+    })
+
+    ReactDOM.findDOMNode(this.refs.textInput).value = ''
+  }
 
   renderTasks() {
     return this.props.tasks.map((task) => {
-    // Now accessing collection for tasks
-    // return this.getTasks().map((task) => {
       return <Task key={task._id} task={task} />
     })
   }
 
   render() {
-    // console.log('render')
     return (
       <div className="container">
         <header>
           <h1>Todo List</h1>
+
+          <form onSubmit={this.handleSubmit.bind(this)} className="new-task">
+            <input
+              type="text"
+              ref="textInput"
+              placeholder="Add a new task here!"
+            />
+          </form>
         </header>
+
 
         <ul>
           {this.renderTasks()}

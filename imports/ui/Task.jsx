@@ -12,5 +12,5 @@ Task.propTypes = {
   task: PropTypes.object.isRequired,
 }
 
-console.log('PropTypes from React: ', PropTypes);
-console.log('Task.propTypes: ', Task.propTypes);
+// console.log('PropTypes from React: ', PropTypes);
+// console.log('Task.propTypes: ', Task.propTypes);

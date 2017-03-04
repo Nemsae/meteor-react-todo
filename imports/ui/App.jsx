@@ -18,7 +18,7 @@ export default class App extends Component {
   }
 
   render() {
-    console.log('render')
+    // console.log('render')
     return (
       <div className="container">
         <header>

@@ -22,14 +22,17 @@ class App extends Component {
 
     const textField = ReactDOM.findDOMNode(this.refs.textInput).value.trim()
 
-    let username = Meteor.user().profile ? Meteor.user().profile.name : Meteor.user().username
+    //  Check for FB user or Regular User
+    // let username = Meteor.user().profile ? Meteor.user().profile.name : Meteor.user().username
 
-    Tasks.insert({
-      text: textField,
-      createdAt: new Date(),
-      owner: Meteor.userId(),
-      username,
-    })
+    // Tasks.insert({
+    //   text: textField,
+    //   createdAt: new Date(),
+    //   owner: Meteor.userId(),
+    //   username,
+    // })
+
+    Meteor.call('tasks.insert', textField)
 
     ReactDOM.findDOMNode(this.refs.textInput).value = ''
   }

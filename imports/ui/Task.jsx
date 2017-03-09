@@ -1,6 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { Meteor } from 'meteor/meteor'
-import { Tasks } from '../api/tasks.js'
+import classnames from 'classnames'
+
+//  METHODS: no longer need to import { Tasks } b/c of methods now being used
+// import { Tasks } from '../api/tasks.js'
 
 export default class Task extends Component {
   toggleChecked() {
@@ -12,8 +15,6 @@ export default class Task extends Component {
   }
 
   deleteThisTask() {
-    // Tasks.remove(this.props.task._id)
-
     Meteor.call('tasks.remove', this.props.task._id)
   }
 
@@ -22,7 +23,11 @@ export default class Task extends Component {
   }
 
   render() {
-    const taskClassName = this.props.task.checked ? 'checked' : ''
+    // const taskClassName = this.props.task.checked ? 'checked' : ''
+    const taskClassName = classnames({
+      checked: this.props.task.checked,
+      private: this.props.task.private,
+    })
 
     return (
       <li className='taskClassName'>

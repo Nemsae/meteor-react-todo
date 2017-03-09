@@ -68,7 +68,7 @@ class App extends Component {
   }
 
   render() {
-    console.log('currentUser: ', this.props.currentUser);
+    console.log('Meteor.users: ', Meteor.users);
     return (
       <div className="container">
         <header>

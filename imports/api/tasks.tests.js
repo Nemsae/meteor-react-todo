@@ -22,7 +22,13 @@ if (Meteor.isServer) {
       })
 
       it('can delete owned task', () => {
+        const deleteTask = Meteor.server.method_handlers['tasks.remove']
 
+        const invocation = { userId }
+
+        deleteTask.apply(invocation, [taskId])
+
+        assert.equal(Tasks.find().count(), 0)
       })
     })
   })
